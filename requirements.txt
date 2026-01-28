@@ -5,3 +5,4 @@ scikit-learn
 plotly
 google-generativeai
 python-dotenv
+supabase
