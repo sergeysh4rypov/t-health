@@ -76,7 +76,7 @@ st.markdown("""
     #MainMenu {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
-t.title("🧬 T-Health AI Pro")
+st.title("🧬 T-Health AI Pro")
 st.markdown("<p style='text-align: center; color: #94a3b8;'>Система предиктивной аналитики здоровья на базе ИИ</p>", unsafe_allow_html=True)
 st.divider()
 
