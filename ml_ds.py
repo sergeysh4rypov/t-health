@@ -11,41 +11,74 @@ import streamlit as st
 # Блок кастомного дизайна
 st.markdown("""
     <style>
-    /* Главный фон и шрифты */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-    
-    html, body, [class*="css"]  {
-        font-family: 'Inter', sans-serif;
+    /* 1. Настройка фона всей страницы */
+    .stApp {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        background-attachment: fixed;
     }
 
-    /* Стилизация основной кнопки */
-    div.stButton > button:first-child {
-        background: linear-gradient(45deg, #FFD700, #FFA500);
-        color: black;
-        border: none;
-        border-radius: 10px;
-        padding: 0.6rem 2rem;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-    }
-    
-    div.stButton > button:first-child:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
-        color: white;
+    /* 2. Шрифты и основной текст */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+    html, body, [class*="css"] {
+        font-family: 'Montserrat', sans-serif;
+        color: #f8fafc;
     }
 
-    /* Красивые карточки для результатов */
-    .stAlert {
-        border-radius: 15px;
-        border: none;
-        background: rgba(255, 255, 255, 0.05);
+    /* 3. Эффект матового стекла для карточек (Glassmorphism) */
+    div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column;"] > div {
+        background: rgba(255, 255, 255, 0.03);
         backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 20px;
         border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 10px;
     }
+
+    /* 4. Стилизация заголовка */
+    h1 {
+        background: linear-gradient(90deg, #FFD700, #FFA500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800 !important;
+        text-align: center;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    }
+
+    /* 5. Кнопка "Рассчитать" — еще более сочная */
+    div.stButton > button:first-child {
+        width: 100%;
+        background: linear-gradient(90deg, #f59e0b, #d97706);
+        color: white !important;
+        border: none;
+        border-radius: 12px;
+        padding: 1rem;
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+    }
+
+    div.stButton > button:first-child:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+        background: linear-gradient(90deg, #fbbf24, #f59e0b);
+    }
+
+    /* 6. Кастомные слайдеры */
+    .stSlider [data-baseweb="slider"] {
+        background-color: transparent;
+    }
+    
+    /* Скрываем стандартный футер Streamlit */
+    footer {visibility: hidden;}
+    #MainMenu {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
+t.title("🧬 T-Health AI Pro")
+st.markdown("<p style='text-align: center; color: #94a3b8;'>Система предиктивной аналитики здоровья на базе ИИ</p>", unsafe_allow_html=True)
+st.divider()
 
 # --- 1. Инициализация ---
 load_dotenv()
