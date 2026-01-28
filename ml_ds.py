@@ -6,6 +6,46 @@ import plotly.express as px
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
+import streamlit as st
+
+# Блок кастомного дизайна
+st.markdown("""
+    <style>
+    /* Главный фон и шрифты */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+    
+    html, body, [class*="css"]  {
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* Стилизация основной кнопки */
+    div.stButton > button:first-child {
+        background: linear-gradient(45deg, #FFD700, #FFA500);
+        color: black;
+        border: none;
+        border-radius: 10px;
+        padding: 0.6rem 2rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    }
+    
+    div.stButton > button:first-child:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        color: white;
+    }
+
+    /* Красивые карточки для результатов */
+    .stAlert {
+        border-radius: 15px;
+        border: none;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 # --- 1. Инициализация ---
 load_dotenv()
