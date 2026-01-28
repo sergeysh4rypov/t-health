@@ -7,6 +7,13 @@ import google.generativeai as genai
 import os
 from dotenv import load_dotenv
 import streamlit as st
+from supabase import create_client, Client
+
+# Инициализация Supabase
+try:
+    supabase: Client = create_client(st.secrets["SUPABASE_URL"], st.secrets["SUPABASE_KEY"])
+except:
+    st.warning("База данных не подключена. Проверьте Secrets.")
 
 # Блок кастомного дизайна
 st.markdown("""
@@ -172,6 +179,22 @@ if analyze_btn:
     user_input = pd.DataFrame([[in_age, in_bmi, in_hr, in_sleep, in_stress, in_vo2, in_glc]], 
                               columns=X.columns)
     prediction = model.predict(user_input)[0]
+    
+    # --- СОХРАНЕНИЕ В БАЗУ ДАННЫХ ---
+    try:
+        supabase.table("health_analytics").insert({
+            "age": int(in_age),
+            "bmi": float(in_bmi),
+            "hr_rest": int(in_hr),
+            "vo2_max": float(in_vo2),
+            "sleep_hours": float(in_sleep),
+            "stress_level": int(in_stress),
+            "glucose": float(in_glc),
+            "bio_age_result": float(prediction)
+        }).execute()
+    except Exception as e:
+        print(f"Ошибка сохранения: {e}") # Юзер этого не увидит
+
     diff = prediction - in_age
     
     # 6.1 Метрики
